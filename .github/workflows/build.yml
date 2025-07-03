@@ -92,7 +92,7 @@ jobs:
         VERSION=${{ github.event.release.tag_name }}
         VERSION_NO_V=${VERSION#v}
         aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_DEV_CLUSTER }}
-        kubectl set image -n testnet-dev deployment/nation-api intent-api=058264535500.dkr.ecr.us-west-1.amazonaws.com/nation-intentkit:${VERSION_NO_V}
+        kubectl set image -n testnet-dev deployment/nation-api nation-api=058264535500.dkr.ecr.us-west-1.amazonaws.com/nation-intentkit:${VERSION_NO_V}
      
     - name: Deploy to Amazon EKS Prod
       if: ${{ github.event_name == 'release' && github.event.action == 'released' }}
@@ -100,7 +100,7 @@ jobs:
         VERSION=${{ github.event.release.tag_name }}
         VERSION_NO_V=${VERSION#v}
         aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_PROD_CLUSTER }}
-        #kubectl set image -n testnet-prod deployment/nation-api intent-api=058264535500.dkr.ecr.us-west-1.amazonaws.com/nation-intentkit:${VERSION_NO_V}
+        #kubectl set image -n testnet-prod deployment/nation-api nation-api=058264535500.dkr.ecr.us-west-1.amazonaws.com/nation-intentkit:${VERSION_NO_V}
      
     - name: Build Success
       if: ${{ success() }}
