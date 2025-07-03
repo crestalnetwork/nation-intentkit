@@ -1,0 +1,20 @@
+[project]
+name = "nation-intentkit"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "intentkit>=0.6.0.dev6",
+]
+
+[project.optional-dependencies]
+test = [
+    "ruff>=0.12.1",
+    "pytest",
+    "pytest-asyncio",
+    "httpx",
+    "fastapi",
+    "uvicorn",
+    "python-dotenv",
+]
