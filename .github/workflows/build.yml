@@ -10,6 +10,7 @@ on:
   release:
     types: [ prereleased, released ]
 
+jobs:
   docker:
     runs-on: ubuntu-latest
     permissions:
