@@ -237,3 +237,15 @@ def test_create_and_get_agent(test_client, agent_id_fixture: str):
     assert retrieved_agent["name"] == agent_name
     assert retrieved_agent["description"] == agent_description
     assert retrieved_agent["owner_id"] == TEST_USER_ID
+
+
+def test_health_endpoint(test_client):
+    """
+    Tests that the health endpoint returns the correct status.
+    """
+    response = test_client.get("/health")
+    assert response.status_code == 200
+    health_data = response.json()
+    assert health_data["status"] == "healthy"
+    assert health_data["service"] == "Nation IntentKit API"
+    assert "version" in health_data

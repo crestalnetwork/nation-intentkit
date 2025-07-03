@@ -45,6 +45,22 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+@app.get(
+    "/health",
+    tags=["Health"],
+    summary="Health check endpoint",
+    description="Returns the health status of the API server",
+)
+async def health_check():
+    """Health check endpoint for monitoring and load balancers."""
+    return {
+        "status": "healthy",
+        "version": config.release,
+        "service": "Nation IntentKit API",
+    }
+
+
 app.include_router(chat_router_rw)
 app.include_router(chat_router_ro)
 app.include_router(agent_router_rw)
