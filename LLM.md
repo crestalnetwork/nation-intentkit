@@ -10,19 +10,29 @@ It includes an API server, a task scheduler, and several scripts.
 
 ## Technology Stack
 
-Package manager: uv, please use native uv command, not use the uv pip command.
+Package manager: uv, please use native `uv` command, do not use the `uv pip` command.
 
-Lint: ruff, run `uv run ruff format & uv run ruff check --fix` after your every edit.
+Lint: ruff, run `uv run ruff format & uv run ruff check --fix` after your final edit.
 
-API framework: fastapi
+API framework: fastapi, Doc in https://fastapi.tiangolo.com/
 
 DB ORM: SQLAlchemy 2.0, please check the 2.0 api for use, do not use the legacy way.
+Doc in https://docs.sqlalchemy.org/en/20/
 
 Model: Pydantic V2, Also be careful not to use the obsolete V1 interface.
+Doc in https://docs.pydantic.dev/latest/
 
 ## Rules
 
 1. Always use the latest version of the new package.
 2. Always use English for code comments.
 3. Always use English to search.
-4. If you want to generate git commit message, always start with feat/fix/chore/docs/test/refactor/improve. Format: `<type>: <subject>`, subject should start with lowercase. Only one-line title needed, do not generate message body.
+
+## Guide
+
+### Git Commit
+When you generate git commit message, always start with one of feat/fix/chore/docs/test/refactor/improve. Title Format: `<type>: <subject>`, subject should start with lowercase. Only one-line needed, do not generate commit message body.
+
+### Github Release
+Please use gh command to do it. First find the last release/pre-release, diff the origin/main with it, write the RELEASE_NOTES, insert the note to RELEASE_NOTES.md, use it as release description. Add a diff link to release description too.
+Do release only, don't create branch, tag, or pull request.

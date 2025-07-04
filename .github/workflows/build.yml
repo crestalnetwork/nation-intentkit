@@ -1,11 +1,6 @@
 name: Build Docker Image and Deploy
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
   release:
     types: [prereleased, released]
 
@@ -86,7 +81,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Deploy to Amazon EKS Dev
-        if: ${{ github.event_name == 'release' && github.event.action == 'prereleased' }}
+        if: ${{ github.event.action == 'prereleased' }}
         run: |
           VERSION=${{ github.event.release.tag_name }}
           VERSION_NO_V=${VERSION#v}
@@ -94,7 +89,7 @@ jobs:
           kubectl set image -n testnet-dev deployment/nation-api nation-api=058264535500.dkr.ecr.us-west-1.amazonaws.com/nation-intentkit:${VERSION_NO_V}
 
       - name: Deploy to Amazon EKS Prod
-        if: ${{ github.event_name == 'release' && github.event.action == 'released' }}
+        if: ${{ github.event.action == 'released' }}
         run: |
           VERSION=${{ github.event.release.tag_name }}
           VERSION_NO_V=${VERSION#v}
@@ -107,7 +102,6 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Generate Nation SDK
-        if: ${{ github.event_name == 'release'}}
         run: |
           VERSION=${{ github.event.release.tag_name }}
           VERSION_NO_V=${VERSION#v}
