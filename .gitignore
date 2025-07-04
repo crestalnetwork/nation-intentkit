@@ -179,3 +179,7 @@ wallet_data.txt
 *.response
 scripts/*.yaml
 skills.csv
+
+# generated
+nation-sdk/
+openapi.json
