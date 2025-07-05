@@ -37,10 +37,6 @@ jobs:
                     value: ${{ github.actor }}
                   - title: "Action"
                     value: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-                  - title: "Diff"
-                    value: ${{ github.event.head_commit.url }}
-                  - title: "Changes"
-                    value: ${{ toJSON(github.event.head_commit.message) }}
 
       - name: Docker meta
         id: meta
@@ -100,6 +96,12 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
+      
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Generate Nation SDK
         run: |
@@ -111,10 +113,10 @@ jobs:
             -i openapi.json \
             -g typescript-axios \
             -o nation-sdk \
-            --additional-properties=npmName=@intentkit/nation-sdk,npmVersion=${VERSION_NO_V},gitUserId=crestalnetwork,gitRepoId=nation-intentkit
+            --additional-properties=npmName=@intentkit/nation-sdk,npmVersion=${VERSION_NO_V} --git-user-id=crestalnetwork --git-repo-id=nation-intentkit
           cd nation-sdk
-          npm install
-          npm publish --access public
+          npm i
+          npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -145,10 +147,6 @@ jobs:
                     value: ${{ github.actor }}
                   - title: "Image"
                     value: https://hub.docker.com/r/crestal/intentkit/tags
-                  - title: "Diff"
-                    value: ${{  github.event.head_commit.url }}
-                  - title: "Changes"
-                    value: ${{ toJSON(github.event.head_commit.message) }}
 
       - name: Build Failure
         if: ${{ failure() }}
@@ -177,7 +175,3 @@ jobs:
                     value: ${{ github.actor }}
                   - title: "Action"
                     value: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-                  - title: "Diff"
-                    value: ${{ github.event.head_commit.url }}
-                  - title: "Changes"
-                    value: ${{ toJSON(github.event.head_commit.message) }}

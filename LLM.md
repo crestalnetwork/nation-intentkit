@@ -36,6 +36,7 @@ When you generate git commit message, always start with one of feat/fix/chore/do
 ### Github Release
 1. Please use gh command to do it.
 2. Make a `git pull` first.
-3. Find the last release/pre-release, diff the origin/main with it, summarize the release note to RELEASE_NOTES.md, and also insert the note to the beginning of RELEASE_NOTES.md
-4. Construct `gh release create` command, calculate the next version number, use RELEASE_NOTES.md as notes file in gh command.
-5. Use gh to do release only, don't create branch, tag, or pull request.
+3. Find the last release/pre-release, diff the origin/main with it, summarize the release note to changelog.md for later use. Add a diff link to release note too, the from and to should be the version number.
+4. And also insert the release note to the beginning of RELEASE_NOTES.md (This file contains all history release notes, don't use it in gh command)
+5. Construct `gh release create` command, calculate the next version number, use RELEASE_NOTES.md as notes file in gh command.
+6. Use gh to do release only, don't create branch, tag, or pull request.

@@ -3,7 +3,7 @@
 ### Changes
 - fix: ci
 
-[Full Changelog](https://github.com/crestalnetwork/nation-intentkit/compare/v0.1.3...main)
+[Full Changelog](https://github.com/crestalnetwork/nation-intentkit/compare/v0.1.3...v0.1.4)
 
 ## v0.1.0 Pre-release
 
