@@ -4,13 +4,11 @@ import logging
 from typing import Annotated, List, Optional, Dict
 
 from epyxid import XID
-import jwt
 from fastapi import (
     APIRouter,
     Depends,
     HTTPException,
     Path,
-    Request,
     Response,
     status,
     Query,
@@ -31,7 +29,7 @@ from intentkit.models.chat import (
 )
 from intentkit.models.db import get_db
 
-from app.config import config
+from app.auth import get_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -123,29 +121,6 @@ class ChatMessageRequest(BaseModel):
             }
         },
     )
-
-
-def get_user_id(request: Request) -> str:
-    """Extract user_id from JWT token."""
-    token = request.headers.get("Authorization")
-    if not token:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Missing Authorization header",
-        )
-    try:
-        token = token.replace("Bearer ", "")
-        payload = jwt.decode(token, config.jwt_secret, algorithms=["HS256"])
-        user_id = payload.get("jti")
-        if not user_id:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
-            )
-        return user_id
-    except jwt.PyJWTError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
-        )
 
 
 @router_ro.get(

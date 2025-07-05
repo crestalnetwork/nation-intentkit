@@ -12,7 +12,7 @@ TEST_SECRET = "test-secret"
 ALGORITHM = "HS256"
 
 # Create a token and set it as an environment variable for agent_id_fixture
-payload = {"jti": TEST_USER_ID}
+payload = {"aud": TEST_USER_ID}
 token = jwt.encode(payload, TEST_SECRET, algorithm=ALGORITHM)
 
 # fix config

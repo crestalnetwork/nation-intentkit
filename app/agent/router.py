@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from intentkit.models.agent import Agent, AgentCreate, AgentUpdate, AgentResponse
 from intentkit.models.db import get_db
 
-from app.chat.router import get_user_id  # Reusing get_user_id from chat router
+from app.auth import get_user_id  # Use the refactored get_user_id from auth
 
 logger = logging.getLogger(__name__)
 
