@@ -24,11 +24,11 @@ async def get_user_id(token: str = Depends(oauth2_scheme)) -> str:
         if config.env.endswith("dev") or config.env.endswith("prod"):
             user = privy_client.users.verify_access_token(auth_token=token)
             # user is an AccessTokenClaims object, user.user_id is the DID
+            privy_client.users.get(user_id=user["user_id"])
             return user["user_id"]
-            # privy_client.users.get_by_id_token(id_token=token)
         elif config.jwt_secret:
             payload = jwt.decode(token, config.jwt_secret, algorithms=["HS256"])
-            return payload["aud"]
+            return payload["sub"]
         else:
             return "test_user_id"
     except Exception:

@@ -150,6 +150,11 @@ async def create_chat(
     user_id: str = Depends(get_user_id),
 ):
     """Create a new chat thread."""
+    # Verify that the agent exists
+    agent = await Agent.get(aid)
+    if not agent:
+        raise HTTPException(status_code=404, detail=f"Agent {aid} not found")
+
     chat = ChatCreate(
         id=str(XID()),
         agent_id=aid,
@@ -305,8 +310,8 @@ async def send_message(
         chat_id=chat_id,
         user_id=user_id,
         author_id=user_id,
-        author_type=AuthorType.API,
-        thread_type=AuthorType.API,
+        author_type=AuthorType.WEB,
+        thread_type=AuthorType.WEB,
         message=request.message,
         attachments=request.attachments,
         model=None,
@@ -322,7 +327,8 @@ async def send_message(
         search_mode=request.search_mode,
         super_mode=request.super_mode,
     )
-    await user_message.save_in_session(db)
+    # Don't save the message here - let the agent handle saving it
+    # await user_message.save_in_session(db)
 
     if request.stream:
 

@@ -6,10 +6,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "intentkit>=0.6.0.dev6",
+    "privy-client>=0.5.0",
 ]
 
-[project.optional-dependencies]
-test = [
+[dependency-groups]
+dev = [
     "ruff>=0.12.1",
     "pytest",
     "pytest-asyncio",

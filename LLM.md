@@ -22,6 +22,8 @@ Doc in https://docs.sqlalchemy.org/en/20/
 Model: Pydantic V2, Also be careful not to use the obsolete V1 interface.
 Doc in https://docs.pydantic.dev/latest/
 
+Testing Framework: pytest
+
 ## Rules
 
 1. Always use the latest version of the new package.
