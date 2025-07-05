@@ -1,3 +1,9 @@
+## v0.1.6
+
+- chore: update workflow, docs, and release notes
+
+[Compare changes](https://github.com/crestalnetwork/nation-intentkit/compare/v0.1.5...v0.1.6)
+
 ## v0.1.4
 
 ### Changes
