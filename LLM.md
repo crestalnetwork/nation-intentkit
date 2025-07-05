@@ -34,5 +34,8 @@ Doc in https://docs.pydantic.dev/latest/
 When you generate git commit message, always start with one of feat/fix/chore/docs/test/refactor/improve. Title Format: `<type>: <subject>`, subject should start with lowercase. Only one-line needed, do not generate commit message body.
 
 ### Github Release
-Please use gh command to do it. First find the last release/pre-release, diff the origin/main with it, write the RELEASE_NOTES, insert the note to RELEASE_NOTES.md, use it as release description. Add a diff link to release description too.
-Do release only, don't create branch, tag, or pull request.
+1. Please use gh command to do it.
+2. Make a `git pull` first.
+3. Find the last release/pre-release, diff the origin/main with it, summarize the release note to RELEASE_NOTES.md, and also insert the note to the beginning of RELEASE_NOTES.md
+4. Construct `gh release create` command, calculate the next version number, use RELEASE_NOTES.md as notes file in gh command.
+5. Use gh to do release only, don't create branch, tag, or pull request.

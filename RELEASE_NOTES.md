@@ -1,4 +1,11 @@
-# v0.1.0 Pre-release
+## v0.1.4
+
+### Changes
+- fix: ci
+
+[Full Changelog](https://github.com/crestalnetwork/nation-intentkit/compare/v0.1.3...main)
+
+## v0.1.0 Pre-release
 
 This is a pre-release for preview and testing purposes.
 
